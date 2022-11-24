@@ -39,7 +39,7 @@ client.on("message", async (message) => {
     // send the attachment to the channel
     message.channel.sendMessage({
         content: "Here is your file!",
-        attachments: attachments // Note that attachments alway has to be an array, even if you're only uploading one file
+        attachments: attachments // Note that attachments always has to be an array, even if you're only uploading one file
     });
     // All done!
   });
