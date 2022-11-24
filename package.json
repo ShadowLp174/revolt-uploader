@@ -1,0 +1,24 @@
+{
+  "name": "revolt-uploader",
+  "version": "1.0.0",
+  "description": "A utility script to allow easy uploads of files to revolt.",
+  "main": "Uploader.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "revolt",
+    "messages",
+    "file",
+    "upload",
+    "attachments",
+    "js",
+    "revolt.chat"
+  ],
+  "author": "ShadowLp174",
+  "license": "ISC",
+  "dependencies": {
+    "form-data": "^4.0.0",
+    "node-fetch": "^2.6.7"
+  }
+}
