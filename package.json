@@ -20,5 +20,14 @@
   "dependencies": {
     "form-data": "^4.0.0",
     "node-fetch": "^2.6.7"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShadowLp174/revolt-uploader.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ShadowLp174/revolt-uploader/issues"
+  },
+  "homepage": "https://github.com/ShadowLp174/revolt-uploader#readme"
 }

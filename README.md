@@ -31,14 +31,17 @@ After that, you can upload files to revolt's servers using the `uploadFile` meth
 client.on("message", async (message) => {
   // you can upload a file using the `upload` method
   // it will return an attachment id, you can add to the message
-  const attachment = await uploader.upload("path/to/file");
-  const attachment1 = await uploader.upload("path/to/file1");
-
-  // send the attachment to the channel
-  message.channel.sendMessage({
-    content: "Here is your file!",
-    attachments: [attachment, attachment1] // You can even send more than one file, by just uploading separately and adding them to the array
+  Promise.allSettled([
+    uploader.upload("path/to/file"),
+    uploader.upload("path/to/another/file"),
+  ]).then(attachments => { // we're using Promise.allSettled to asynchronously upload all of them
+    attachments = attachments.map(attachment => attachment.value); // extracting the value from the promises
+    // send the attachment to the channel
+    message.channel.sendMessage({
+        content: "Here is your file!",
+        attachments: attachments // Note that attachments alway has to be an array, even if you're only uploading one file
+    });
+    // All done!
   });
-  // All done!
 });
 ```
