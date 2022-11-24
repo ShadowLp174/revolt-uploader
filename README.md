@@ -21,16 +21,15 @@ const Uploader = require("revolt-uploader");
 const uploader = new Uploader(client);
 ```
 
-Now you've got your uploader object. All you have to do is to login your bot client using `client.login("token")`
+Now you've got your uploader. All you have to do is to login your bot client using `client.login("token")`
 
-After that, you can upload files to revolt's servers using the `uploadFile` method.
+After that, you can upload files to revolt's servers using the `upload` method.
 
 ```javascript
 // you need to attach this to a message, meaning you need to have a message object
 // you can get this by listening for the `message` event on the client object but this is up to you
-client.on("message", async (message) => {
-  // you can upload a file using the `upload` method
-  // it will return an attachment id, you can add to the message
+client.on("message", (message) => {
+  // the upload method will return an attachment id that you can add to the message
   Promise.allSettled([
     uploader.upload("path/to/file"),
     uploader.upload("path/to/another/file"),
