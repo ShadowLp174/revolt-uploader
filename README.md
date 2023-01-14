@@ -31,8 +31,8 @@ After that, you can upload files to revolt's servers using the `upload` method.
 client.on("message", (message) => {
   // the upload method will return an attachment id that you can add to the message
   Promise.allSettled([
-    uploader.upload("path/to/file"),
-    uploader.upload("path/to/another/file"),
+    uploader.uploadFile("path/to/file"),
+    uploader.uploadFile("path/to/another/file"),
   ]).then(attachments => { // we're using Promise.allSettled to asynchronously upload all of them
     attachments = attachments.map(attachment => attachment.value); // extracting the value from the promises
     // send the attachment to the channel
@@ -41,6 +41,32 @@ client.on("message", (message) => {
         attachments: attachments // Note that attachments always has to be an array, even if you're only uploading one file
     });
     // All done!
+  });
+
+  // async/await approach:
+  message.channel.sendMessage({
+    content: "Here is your file!",
+    attachments: [await uploader.uploadFile("/path/to/another/file")]
+  });
+});
+```
+
+### Advanced usage
+
+If you need to upload anything else than existing files, use the `.upload(fileData, fileName)` method.
+You can use any kind of data object for the fileData but have to specify the file name.
+
+For example using a stream:
+
+```javascript
+const https = require("https");
+
+client.on("message", (message) => {
+  https.get("<url>", (response) => {
+    message.channel.sendMessage({
+      content: "Downloaded file: ",
+      attachments: [await uploader.upload(response, "file.filetype")]
+    });
   });
 });
 ```

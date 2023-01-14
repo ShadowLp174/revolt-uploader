@@ -3,16 +3,20 @@ const FormData = require("form-data");
 const fs = require("fs");
 
 class Uploader {
-    constructor(client) {
+    constructor(client, forceReady=false) {
         this.client = client;
-        this.ready = false;
+        this.ready = forceReady;
+        if (forceReady) {
+          this.url = client.configuration.features.autumn.url;
+          return this;
+        }
         this.client.on("ready", () => {
             this.url = client.configuration.features.autumn.url;
             this.ready = true;
         });
         return this;
     }
-    upload(fileName, tag="attachments") {
+    uploadFile(fileName, tag="attachments") {
         if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
         return new Promise((res, rej) => {
             if (!fileName) rej("Filename can't be empty");
@@ -33,6 +37,24 @@ class Uploader {
                 res(json.id);
             });
         });
+    }
+    upload(file, fileName, tag="attachments") {
+      if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
+
+      return new Promise((res) => {
+        const form = new FormData();
+        form.append("file", file, {
+          filename: fileName,
+          name: "file"
+        });
+
+        fetch(this.url + "/" + tag, {
+          method: "POST",
+          body: form
+        }).then(response => response.json()).then(json => {
+          res(json.id);
+        });
+      });
     }
 }
 
