@@ -6,8 +6,9 @@ class Uploader {
     constructor(client, forceReady=false) {
         this.client = client;
         this.ready = forceReady;
-        if (forceReady) {
+        if (client.configuration) {
           this.url = client.configuration.features.autumn.url;
+          this.ready = true;
           return this;
         }
         this.client.on("ready", () => {
