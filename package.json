@@ -1,6 +1,6 @@
 {
   "name": "revolt-uploader",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "A utility script to allow easy uploads of files to revolt.",
   "main": "Uploader.js",
   "scripts": {

@@ -23,7 +23,7 @@ const uploader = new Uploader(client);
 
 Now you've got your uploader. All you have to do is to login your bot client using `client.login("token")`
 
-After that, you can upload files to revolt's servers using the `upload` method.
+After that, you can upload files to revolt's servers using the `uploadFile` method.
 
 ```javascript
 // you need to attach this to a message, meaning you need to have a message object
@@ -51,6 +51,15 @@ client.on("message", (message) => {
 });
 ```
 
+#### Uploading URLs
+
+You can upload files from urls by using the `uploadUrl` method. It will stream the file from the url to autumn without saving the image on your machine.
+It works just like a normal file upload:
+
+```javascript
+const id = await uploader.uploadUrl("url", "fileName");
+```
+
 ### Advanced usage
 
 If you need to upload anything else than existing files, use the `.upload(fileData, fileName)` method.
@@ -70,3 +79,14 @@ client.on("message", (message) => {
   });
 });
 ```
+
+Furthermore, it is possible to upload your content under different tags. The default tag is `attachments`. These tags are available:
+
+- `attachments`
+- `avatars`
+- `backgrounds`
+- `icons`
+- `banners`
+- `emojis`
+
+All of these have different configurations and limits. See [this file](https://github.com/revoltchat/autumn/blob/d5218727e56e986a4092ee635b10c3fd7c71e373/Autumn.toml#L7C2-L7C2) for the exact specifications.
