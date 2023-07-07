@@ -36,26 +36,15 @@ class Uploader {
       });
     });
   }
-  uploadFile(fileName, tag="attachments") {
+  uploadFile(filePath, name=null, tag="attachments") {
     if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
-    return new Promise((res, rej) => {
-      if (!fileName) rej("Filename can't be empty");
-      const stats = fs.statSync(fileName);
-      let stream = fs.createReadStream(fileName);
+    return new Promise(async (res, rej) => {
+      if (!filePath) rej("File path can't be empty");
+      let stream = fs.createReadStream(filePath);
 
       const formData = new FormData();
       formData.append("file", stream);
-
-      fetch(this.url + "/" + tag, {
-        method: "POST",
-        headers: {
-          "Content-Length": stats.size,
-          "x-session-token": this.client.api.auth.headers["X-Session-Token"]
-        },
-        body: formData
-      }).then(response => response.json()).then(json => {
-        res(json.id);
-      });
+      res(await this.#uploadRaw(stream, name || filePath, tag));
     });
   }
   uploadUrl(url, fileName, tag="attachments") {
