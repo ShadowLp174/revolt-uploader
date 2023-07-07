@@ -22,7 +22,9 @@ class Uploader {
     if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
     return new Promise((res, rej) => {
       if (!fileName) rej("Filename can't be empty");
-      const form = new FormData();
+      const form = new FormData({
+        maxDataSize: Infinity
+      });
       form.append("file", file, {
         filename: fileName,
         name: "file"
@@ -41,9 +43,6 @@ class Uploader {
     return new Promise(async (res, rej) => {
       if (!filePath) rej("File path can't be empty");
       let stream = fs.createReadStream(filePath);
-
-      const formData = new FormData();
-      formData.append("file", stream);
       res(await this.#uploadRaw(stream, name || filePath, tag));
     });
   }
