@@ -16,5 +16,5 @@ jobs:
       - name: commit
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: 'chore: update type definitions'
+          commit_message: 'chore: update type definitions [skip ci]'
           commit_author: GitHub Actions <actions@github.com>
