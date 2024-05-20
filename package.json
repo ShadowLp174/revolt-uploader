@@ -1,9 +1,11 @@
 {
   "name": "revolt-uploader",
-  "version": "1.1.4",
+  "version": "1.1.5",
   "description": "A utility script to allow easy uploads of files to revolt.",
   "main": "Uploader.js",
+  "types": "Uploader.d.ts",
   "scripts": {
+    "build": "tsc --emitDeclarationOnly --allowJs --declaration Uploader.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -16,12 +18,15 @@
     "revolt.chat"
   ],
   "author": "ShadowLp174",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
     "form-data": "^4.0.0",
     "node-fetch": "^2.6.7"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.12.12",
+    "typescript": "^5.4.5"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ShadowLp174/revolt-uploader.git"
