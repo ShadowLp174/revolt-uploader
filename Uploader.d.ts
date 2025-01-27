@@ -2,6 +2,7 @@ export = Uploader;
 declare class Uploader {
     constructor(client: any, forceReady?: boolean);
     client: any;
+    token: string;
     ready: boolean;
     url: any;
     uploadFile(filePath: any, name?: any, tag?: string): Promise<any>;
