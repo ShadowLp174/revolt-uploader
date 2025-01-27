@@ -4,9 +4,10 @@ const https = require("https");
 const fs = require("fs");
 
 class Uploader {
-  constructor(client, forceReady = false) {
+  constructor(client, token, forceReady = false) {
     this.client = client;
     this.ready = forceReady;
+    this.token = token
     if (client.configuration) {
       this.url = client.configuration.features.autumn.url;
       this.ready = true;
@@ -20,6 +21,7 @@ class Uploader {
   }
   #uploadRaw(file, fileName, tag="attachments") {
     if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
+    if (!this.token) throw new Error("Bot token is not set.");
     return new Promise((res, rej) => {
       if (!fileName) rej("Filename can't be empty");
       const form = new FormData({
@@ -32,7 +34,11 @@ class Uploader {
 
       fetch(this.url + "/" + tag, {
         method: "POST",
-        body: form
+        body: form,
+        headers: {
+          "Content-Type": `multipart/form-data; boundary=${form.getBoundary()}`,
+          "X-Bot-Token": this.token
+        }
       }).then(response => response.json()).then(json => {
         res(json.id);
       });
@@ -40,6 +46,7 @@ class Uploader {
   }
   uploadFile(filePath, name=null, tag="attachments") {
     if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
+    if (!this.token) throw new Error("Bot token is not set.");
     return new Promise(async (res, rej) => {
       if (!filePath) rej("File path can't be empty");
       let stream = fs.createReadStream(filePath);
@@ -48,6 +55,7 @@ class Uploader {
   }
   uploadUrl(url, fileName, tag="attachments") {
     if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
+    if (!this.token) throw new Error("Bot token is not set.");
     return new Promise((res) => {
       https.get(url, async (response) => {
         res(await this.#uploadRaw(response, fileName, tag));
@@ -56,6 +64,7 @@ class Uploader {
   }
   upload(file, fileName, tag="attachments") {
     if (!this.ready) throw new Error("Client is not ready yet. Login it with client.login() first.");
+    if (!this.token) throw new Error("Bot token is not set.");
 
     return this.#uploadRaw(file, fileName, tag);
   }
