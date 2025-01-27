@@ -2,6 +2,8 @@
 
 Revolt.js doesn't offer the ability to upload attachments, so here is a utility package to allow easy file uploads.
 
+**WORKS AS OF THE LATEST CDN UPDATES!**
+
 ## Installation
 
 `npm install revolt-uploader`
@@ -18,7 +20,7 @@ const Uploader = require("revolt-uploader");
 
 // you have to initialize a revolt.js client object as well.
 // Then initialize the uploader and provide it with the client
-const uploader = new Uploader(client);
+const uploader = new Uploader(client, token);
 ```
 
 Now you've got your uploader. All you have to do is to login your bot client using `client.login("token")`
