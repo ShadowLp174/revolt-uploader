@@ -32,8 +32,13 @@ class Uploader {
 
       fetch(this.url + "/" + tag, {
         method: "POST",
-        body: form
+        headers: {
+          ...this.client.api.auth.headers,
+          ...form.getHeaders()
+        },
+        body: form,
       }).then(response => response.json()).then(json => {
+        if (!json.id) throw json;
         res(json.id);
       });
     });
