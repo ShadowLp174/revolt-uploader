@@ -1,6 +1,6 @@
-# Revolt Uploader
+# Stoat (Revolt) Uploader
 
-Revolt.js doesn't offer the ability to upload attachments, so here is a utility package to allow easy file uploads.
+Stoat.js doesn't offer the ability to upload attachments, so here is a utility package to allow easy file uploads.
 
 ## Installation
 
@@ -16,14 +16,14 @@ First, you have to import and initialize an uploader object.
 // import the uploader library
 const Uploader = require("revolt-uploader");
 
-// you have to initialize a revolt.js client object as well.
+// you have to initialize a stoat.js client object as well.
 // Then initialize the uploader and provide it with the client
 const uploader = new Uploader(client);
 ```
 
 Now you've got your uploader. All you have to do is to login your bot client using `client.login("token")`
 
-After that, you can upload files to revolt's servers using the `uploadFile` method.
+After that, you can upload files to Stoat's servers using the `uploadFile` method.
 
 ```javascript
 // you need to attach this to a message, meaning you need to have a message object
@@ -89,4 +89,4 @@ Furthermore, it is possible to upload your content under different tags. The def
 - `banners`
 - `emojis`
 
-All of these have different configurations and limits. See [this file](https://github.com/revoltchat/autumn/blob/d5218727e56e986a4092ee635b10c3fd7c71e373/Autumn.toml#L7C2-L7C2) for the exact specifications.
+All of these have different configurations and limits. See [Stoat's documentation](https://cdn.stoatusercontent.com/scalar#tag/api/POST/{tag}.path.tag) for the exact specifications.
