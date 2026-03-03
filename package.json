@@ -1,6 +1,6 @@
 {
   "name": "revolt-uploader",
-  "version": "1.1.5",
+  "version": "1.1.6",
   "description": "A utility script to allow easy uploads of files to revolt.",
   "main": "Uploader.js",
   "types": "Uploader.d.ts",
@@ -10,17 +10,19 @@
   },
   "keywords": [
     "revolt",
+    "stoat",
+    "stoat.js",
     "messages",
     "file",
     "upload",
     "attachments",
     "js",
-    "revolt.chat"
+    "stoat.chat"
   ],
   "author": "ShadowLp174",
   "license": "MIT",
   "dependencies": {
-    "form-data": "^4.0.0",
+    "form-data": "^4.0.5",
     "node-fetch": "^2.6.7"
   },
   "devDependencies": {
