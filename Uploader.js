@@ -30,11 +30,13 @@ class Uploader {
         name: "file"
       });
 
+      console.log(this.url + "/" + tag);
+
       fetch(this.url + "/" + tag, {
         method: "POST",
         headers: {
-          ...this.client.api.auth.headers,
-          ...form.getHeaders()
+          ...this.client.api.auth,
+          //...form.getHeaders()
         },
         body: form,
       }).then(response => response.json()).then(json => {
