@@ -30,8 +30,6 @@ class Uploader {
         name: "file"
       });
 
-      console.log(this.url + "/" + tag);
-
       fetch(this.url + "/" + tag, {
         method: "POST",
         headers: {
